@@ -5,6 +5,7 @@ from augmentations.swap import SwapWords
 from augmentations.synonym import SynonymReplace
 from augmentations.translation import BackTranslate
 import nltk
+nltk.download('omw-1.4')
 nltk.download('punkt')
 nltk.download('wordnet')
 
