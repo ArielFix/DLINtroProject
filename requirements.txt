@@ -1,3 +1,4 @@
 translators
 torch
 nltk
+scipy
