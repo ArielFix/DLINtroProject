@@ -2,3 +2,4 @@ translators
 torch
 nltk>=3.8.1
 scipy
+transformers
