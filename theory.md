@@ -33,4 +33,4 @@ NSP - The model is given a pair of sequences and tries to predict if the second 
 It is important to note that RoBERTa was also trained on a larger dataset.
 
 ##  twitter-roberta-base-sentiment
-We decided to use a public model trained from RoBERTa on tweets, this model was fine-tuned on sentiment analysis of tweets. Using a model trained on the tweet format may help improve the result since it is familiar with the "dialect" used on Twitter - phrases and structural changes to text that appear due to online culture and the format - and social nature - of the application.
+We decided to use a public model trained from RoBERTa on tweets, this model was fine-tuned on sentiment analysis of tweets. Using a model trained on the tweet format may help improve the result since it is familiar with the "dialect" used on Twitter - phrases and structural changes to language that emerge due to online culture and the format - and social nature - of the application.
