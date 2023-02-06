@@ -44,7 +44,7 @@ class RandomInsertion:
             Input Text
         """
         words = list(word_tokenize(sample))
-        chosen_words = random.sample(words, self.number_of_insertions)
+        chosen_words = random.sample(words, min(self.number_of_insertions, len(words)))
 
         for chosen_word in chosen_words:
             if chosen_word in stop_words:

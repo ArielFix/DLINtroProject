@@ -36,7 +36,7 @@ class BackTranslate:
         """
         inp_language = self.inp_language.value
         augmentation_language = random.choice(self.languages).value
-        if augmentation_language == self.inp_language:
+        if augmentation_language == self.inp_language.value:
             return sample
         sample = google(google(sample, inp_language, augmentation_language), augmentation_language, inp_language)
         return sample
