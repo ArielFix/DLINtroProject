@@ -21,7 +21,8 @@ class SynonymReplace:
             Input Text
         """
         words = set(word_tokenize(sample))
-        chosen_words = random.sample(words, self.number_of_replacements)
+        
+        chosen_words = random.sample(words, min(self.number_of_replacements, len(words)))
         
         for chosen_word in chosen_words:
             synonyms = sum(wordnet.synonyms(chosen_word),[])

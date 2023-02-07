@@ -1,3 +1,4 @@
+pandas
 translators
 torch
 nltk>=3.8.1

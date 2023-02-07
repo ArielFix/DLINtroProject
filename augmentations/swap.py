@@ -22,8 +22,12 @@ class SwapWords:
             Input Text
         """
         words = list(word_tokenize(sample))
+        if len(words) == 1:
+            return sample
 
         for _ in range(self.number_of_swaps):
+            
+            
             i,j = random.sample(range(len(words)), k=2)
             temp = words[i]
             words[i] = words[j]
