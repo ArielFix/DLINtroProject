@@ -132,7 +132,7 @@ class RobertaHandler:
             epoches.append(epoch)
             val_acc_estimation = self.estimate_roberta_model_accuracy(model_val_outputs, model_val_labels)
             val_accs.append(val_acc_estimation)
-            print(f"====> Epoch: {epoch} Average train loss: {train_losses[epoch]:.4f}, train acc: {train_accs[epoch]:.4f}, Average val loss: {val_losses[epoch]:.4f}, val acc: {val_accs[epoch]:.4f}")
+            print(f"====> Epoch: {epoch+1} Average train loss: {train_losses[epoch]:.4f}, train acc: {train_accs[epoch]:.4f}, Average val loss: {val_losses[epoch]:.4f}, val acc: {val_accs[epoch]:.4f}")
         
         return epoches, train_losses, val_losses, train_accs, val_accs
 
