@@ -11,6 +11,8 @@ class ModifyRoberta:
         for parameter in model.parameters():
             parameter.requires_grad = False
 
-        for classifier_parameter in model.classifier.parameters():
+        for classifier_parameter in model.classifier.out_proj.parameters():
             classifier_parameter.requires_grad = True
+
+        model.classifier.out_proj[0].reset_parameters
 

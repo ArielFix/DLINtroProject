@@ -50,14 +50,31 @@ class RobertaHandler:
 
 
     def train_roberta_model(self, model, train_data, val_data, learning_rate=1e-3, weight_decay=0, batch_size=32, num_epoches=30, check_point_path=None):
-        
+        """
+
+        :param model: Roberta model and tokenizer
+        :param train_data: pandas dataframe for train
+        :param val_data: pandas dataframe for validation
+        :param learning_rate: learning rate for optimizer
+        :param weight_decay: weight decay for Adam optimizer
+        :param batch_size: batch size from the data for each iteration
+        :param num_epoches: amount of epoches for the train
+        :param check_point_path: path for saving the model
+        :return:
+        epochs: list with epochs count
+        train_losses: train loss for each epoch
+        val_losses: validation loss for each iteration
+        train_accs: f1 score for train data
+        al_accs: f1 score for validation data,
+        model as the model with best f1 score on the validation set
+        """
         roberta_model = model.model
         roberta_model.to(device)
         tokenizer = model.tokenizer
         criterion = nn.CrossEntropyLoss()
         optimizer = torch.optim.Adam(roberta_model.parameters(),
                                 lr=learning_rate,
-                                weight_decay=weight_decay)
+                                weight_decay=weight_decay, )
         val_batch_size = batch_size
         if len(val_data) < batch_size:
             val_batch_size = len(val_data)
@@ -71,7 +88,6 @@ class RobertaHandler:
             epoch_train_loss = 0
             train_iterations_counter = 0
             
-
             train_random_order = torch.randperm(len(train_data)).numpy()
             val_random_order = torch.randperm(len(val_data)).numpy()
             for i in range(0, len(train_data), batch_size):
@@ -131,9 +147,13 @@ class RobertaHandler:
             val_losses.append(epoch_val_loss/ val_iterations_counter)
             epoches.append(epoch)
             val_acc_estimation = self.estimate_roberta_model_accuracy(model_val_outputs, model_val_labels)
+            if epoch > 0:
+                if val_acc_estimation < val_accs[epoch-1]:
+                    best_model = roberta_model
             val_accs.append(val_acc_estimation)
             print(f"====> Epoch: {epoch+1} Average train loss: {train_losses[epoch]:.4f}, train acc: {train_accs[epoch]:.4f}, Average val loss: {val_losses[epoch]:.4f}, val acc: {val_accs[epoch]:.4f}")
-        
+
+        model.model = best_model
         return epoches, train_losses, val_losses, train_accs, val_accs
 
     def plot_learning_curve(epoches, train_losses, val_losses, train_accs, val_accs):
